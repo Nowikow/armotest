@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>App</title>
+</head>
+
+<body>
+    <hr>
+    <div>Ответ от сервера</div>
+    <hr>
+</body>
+
+<script>
+    require('./render.js');
+</script>
+
+<script>
+    let socket = new WebSocket("ws://localhost:3000");
+
+    socket.onopen = function(e) {
+        alert("Соединение установлено");
+        alert("Отправляем данные на сервер");
+        socket.send("Hi! I'was on server. I saw a demon!");
+    };
+
+    socket.onmessage = function(event) {
+        alert('Сообщение вернулось!')
+        alert(event.data);
+    };
+</script>
+
+</html>
